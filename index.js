@@ -1,23 +1,21 @@
-import {UsersController} from "./routes/users/index.js";
-import express from "express";
-import pg from 'pg';
-const { Pool } = pg;
+import { UsersController } from './routes/users/index.js';
+import express from 'express';
+import { dbConnection } from './dbConnection.js';
 
 const app = express();
 const port = 3000;
 
-export const dbConnection = new Pool({
-	user: 'jan',
-	password: 'password',
-	host: 'localhost',
-	database: 'mod_3',
-	port: '5466',
-})
+export const dbClient = dbConnection;
 
 app.use(express.json());
 
-app.get('/usuarios', UsersController.getUsers.bind(UsersController));
+app.get('/users/age-avg', UsersController.getAvgAge.bind(UsersController));
+app.get('/users', UsersController.getUsers.bind(UsersController));
+app.post('/users', UsersController.createUser.bind(UsersController));
+app.get('/users/:id', UsersController.getUser.bind(UsersController));
+app.put('/users/:id', UsersController.editUser.bind(UsersController));
+app.delete('/users/:id', UsersController.deleteUser.bind(UsersController));
 
 app.listen(port, () => {
-	console.log(`The app is running =) ${port}`)
+  console.log(`The app is running =) ${port}`);
 });
