@@ -1,0 +1,16 @@
+version: "0.1.0"
+services:
+  db:
+    image: postgres
+    restart: always
+    container_name: database
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=module_3_db
+    ports:
+      - 5466:5432
+    expose:
+      - 5466
+    volumes:
+      - ./initMod3Db.sql:/docker-entrypoint-initdb.d/initMod3Db.sql
