@@ -15,6 +15,7 @@ app.post('/users', UsersController.createUser.bind(UsersController));
 app.get('/users/:id', UsersController.getUser.bind(UsersController));
 app.put('/users/:id', UsersController.editUser.bind(UsersController));
 app.delete('/users/:id', UsersController.deleteUser.bind(UsersController));
+app.get('/status', UsersController.getServerState.bind(UsersController));
 
 app.listen(port, () => {
   console.log(`The app is running =) ${port}`);
