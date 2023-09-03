@@ -41,6 +41,7 @@ class UserModel {
         select *
         from users
         where id = ${id}
+          and enabled = true
 		`;
     const { rows } = await dbClient.query(getUsersSql);
     return rows;
