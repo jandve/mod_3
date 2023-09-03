@@ -56,16 +56,6 @@ class UserController {
     const avg = await this.model.usersAgeAvg();
     res.status(200).send({ avg });
   }
-
-  async getServerState(req, res) {
-    const status = {
-      nameSystem: 'api-users',
-      version: '0.0.1',
-      developer: 'R. Alajandro Alcocer Vega',
-      email: 'alejandro.av84@gmail.com',
-    };
-    res.status(200).send(status);
-  }
 }
 
 const model = new UserModel();
