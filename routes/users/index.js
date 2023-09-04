@@ -53,8 +53,8 @@ class UserController {
   }
 
   async getAvgAge(req, res) {
-    const avg = await this.model.usersAgeAvg();
-    res.status(200).send({ avg });
+    const [avg] = await this.model.usersAgeAvg();
+    res.status(200).send(avg);
   }
 
   async getServerState(req, res) {
