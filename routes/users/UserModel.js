@@ -1,25 +1,24 @@
 import { dbClient } from '../../index.js';
 
 class UserModel {
-  async createUser(ci, name, first_lastname, second_lastname, birth, age) {
+  async createUser(ci, name, first_lastname, second_lastname, birth) {
     const createUserSql = `
-        insert into users(ci, name, first_lastname, second_lastname, birth, age, enabled)
-        values ('${ci}', '${name}', '${first_lastname}', '${second_lastname}', '${birth}', '${age}', '${true}
+        insert into users(ci, name, first_lastname, second_lastname, birth, enabled)
+        values ('${ci}', '${name}', '${first_lastname}', '${second_lastname}', '${birth}', '${true}
                 ') RETURNING *
 		`;
     const { rows } = await dbClient.query(createUserSql);
     return rows;
   }
 
-  async editUser(id, ci, name, first_lastname, second_lastname, birth, age) {
+  async editUser(id, ci, name, first_lastname, second_lastname, birth) {
     const editUserSql = `
         update users
         set ci             = '${ci}',
             name           ='${name}',
             first_lastname='${first_lastname}',
             second_lastname='${second_lastname}',
-            birth='${birth}',
-            age='${age}'
+            birth='${birth}'
         where id = ${id} RETURNING *
 		`;
     const { rows } = await dbClient.query(editUserSql);
@@ -57,7 +56,7 @@ class UserModel {
   }
 
   async usersAgeAvg() {
-    const avgQuery = 'select avg(extract(year from age(now(), birth))) as avg from users;';
+    const avgQuery = 'select avg(extract(year from age(now(), birth))) as avg from users where enabled = true;';
     const { rows } = await dbClient.query(avgQuery);
     return rows;
   }

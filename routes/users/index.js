@@ -6,12 +6,12 @@ class UserController {
   }
 
   async createUser(req, res) {
-    const { ci, name, first_lastname, second_lastname, birth, age } = req.body;
-    if (!ci || !name || !first_lastname || !second_lastname || !birth || !age) {
-      res.status(400).send('A user required all fields, ci, name, first_lastname, second_lastname, birth, age');
+    const { ci, name, first_lastname, second_lastname, birth } = req.body;
+    if (!ci || !name || !first_lastname || !second_lastname || !birth) {
+      res.status(400).send('A user required all fields, ci, name, first_lastname, second_lastname, birth');
     }
     //Todo validate user fields
-    const userCreated = await this.model.createUser(ci, name, first_lastname, second_lastname, birth, age);
+    const userCreated = await this.model.createUser(ci, name, first_lastname, second_lastname, birth);
     res.status(201).send({ ...userCreated });
   }
 
@@ -20,12 +20,12 @@ class UserController {
     if (!id) {
       res.status(400).send('User ID is required');
     }
-    const { ci, name, first_lastname, second_lastname, birth, age } = req.body;
-    if (!ci || !name || !first_lastname || !second_lastname || !birth || !age) {
-      res.status(400).send('A user required all fields, ci, name, first_lastname, second_lastname, birth, age');
+    const { ci, name, first_lastname, second_lastname, birth } = req.body;
+    if (!ci || !name || !first_lastname || !second_lastname || !birth) {
+      res.status(400).send('A user required all fields, ci, name, first_lastname, second_lastname, birth');
     }
     //Todo validate user fields
-    const userEdited = await this.model.editUser(id, ci, name, first_lastname, second_lastname, birth, age);
+    const userEdited = await this.model.editUser(id, ci, name, first_lastname, second_lastname, birth);
     res.status(200).send({ ...userEdited });
   }
 

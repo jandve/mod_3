@@ -23,12 +23,12 @@ How it works
         post /users
             - Creates a user all the information is required
             - Required information: 
-            - ci, name, first_lastname, second_lastname, birth, age
+            - ci, name, first_lastname, second_lastname, birth
             - Return the created user object
         put /users/:id
             - Edit a specific user given an ID, all the information is required
             - Required information: 
-            - ci, name, first_lastname, second_lastname, birth, age
+            - ci, name, first_lastname, second_lastname, birth
             - Return the edited user object
         delete /users/:id
             - Delete a user given an ID.
